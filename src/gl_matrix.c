@@ -11,6 +11,7 @@
 #include <GL/dgl.h>
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
 #include "private.h"
 
 //------------------------------------------------------------------------

@@ -10,6 +10,7 @@
 //------------------------------------------------------------------------
 #include <GL/dgl.h>
 #include <stdlib.h>
+#include <string.h>
 #include "private.h"
 
 DGLcontext *g_ctx=0;	// Pointer to the current process context

@@ -9,6 +9,7 @@
 // Read DreamGL LICENSE.txt file for further details.
 //------------------------------------------------------------------------
 #include <GL/dgl.h>
+#include <string.h>
 #include "private.h"
 
 //------------------------------------------------------------------------

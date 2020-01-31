@@ -80,10 +80,10 @@ uint16 pf;	// pixel format
 
 	dma_reset();
 	GS_RESET();
-	__asm__("
-		sync.p
-		nop
-	");
+	__asm__(
+		"sync.p		\n"
+		"nop"
+	);
 
 	gs_set_imr();
 	gs_set_crtc(g_ctx->ps2VidInterlace, g_ctx->ps2VidType, g_ctx->ps2VidFrame);
