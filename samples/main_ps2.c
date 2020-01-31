@@ -8,8 +8,13 @@
 // Licenced under Academic Free License version 2.0
 // Read DreamGL LICENSE.txt file for further details.
 //------------------------------------------------------------------------
+
+#include <stdio.h>
+#include <stdlib.h>
 #include <GL/gl.h>
 #include <GL/dgl.h>
+#include <sifrpc.h>
+#include <string.h>
 
 DGLcontext	ctx;
 

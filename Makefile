@@ -39,9 +39,6 @@ CFLAGS= \
 	-L$(DIR_LIB) \
 	-DDGL_PS2
 
-LINKFILE=$(PS2SDK)/ee/startup/linkfile
-CRTFILE=$(PS2SDK)/ee/startup/crt0.o
-
 CSRC = \
 	$(DIR_SRC_PS2CPU)/ee.c \
 	$(DIR_SRC_PS2CPU)/gs.c \
@@ -65,7 +62,8 @@ SOBJ=$(SSRC:.s=.o)
 OBJ=$(COBJ) $(SOBJ)
 
 
-all: $(DIR_BIN) $(DIR_LIB) $(LIB_DREAMGL) $(DIR_BIN)/demo1.elf $(DIR_BIN)/demo2.elf $(DIR_BIN)/demo3.elf $(DIR_BIN)/demo4.elf $(DIR_BIN)/demo5.elf
+# all: $(DIR_BIN) $(DIR_LIB) $(LIB_DREAMGL)
+all: $(DIR_BIN) $(DIR_LIB) $(LIB_DREAMGL) demos
 
 $(DIR_BIN):
 	mkdir -p $(DIR_BIN)
@@ -77,27 +75,8 @@ $(LIB_DREAMGL): $(OBJ)
 	@echo "-------------------------------------------------"
 	$(AR) -cr $(LIB_DREAMGL) $(OBJ)
 
-$(DIR_BIN)/demo1.elf: $(LIB_DREAMGL) $(DIR_SRC_SAMPLES)/main_ps2.o $(DIR_SRC_SAMPLES)/demo1.o
-	@echo "-------------------------------------------------"
-	$(CC) $(CFLAGS) -T$(LINKFILE) -o $(DIR_BIN)/demo1.elf $(DIR_SRC_SAMPLES)/main_ps2.o $(DIR_SRC_SAMPLES)/demo1.o $(CRTFILE) $(DEMO_LIBS)
-
-$(DIR_BIN)/demo2.elf: $(LIB_DREAMGL) $(DIR_SRC_SAMPLES)/main_ps2.o $(DIR_SRC_SAMPLES)/demo2.o
-	@echo "-------------------------------------------------"
-	$(CC) $(CFLAGS) -T$(LINKFILE) -o $(DIR_BIN)/demo2.elf $(DIR_SRC_SAMPLES)/main_ps2.o $(DIR_SRC_SAMPLES)/demo2.o $(CRTFILE) $(DEMO_LIBS)
-
-$(DIR_BIN)/demo3.elf: $(LIB_DREAMGL) $(DIR_SRC_SAMPLES)/main_ps2.o $(DIR_SRC_SAMPLES)/demo3.o
-	@echo "-------------------------------------------------"
-	$(CC) $(CFLAGS) -T$(LINKFILE) -o $(DIR_BIN)/demo3.elf $(DIR_SRC_SAMPLES)/main_ps2.o $(DIR_SRC_SAMPLES)/demo3.o $(CRTFILE) $(DEMO_LIBS)
-
-$(DIR_BIN)/demo4.elf: $(LIB_DREAMGL) $(DIR_SRC_SAMPLES)/main_ps2.o $(DIR_SRC_SAMPLES)/demo4.o $(DIR_SRC_SAMPLES)/testbmp.o
-	@echo "-------------------------------------------------"
-	$(CC) $(CFLAGS) -T$(LINKFILE) -o $(DIR_BIN)/demo4.elf $(DIR_SRC_SAMPLES)/main_ps2.o $(DIR_SRC_SAMPLES)/demo4.o $(DIR_SRC_SAMPLES)/testbmp.o $(CRTFILE) $(DEMO_LIBS)
-
-$(DIR_BIN)/demo5.elf: $(LIB_DREAMGL) $(DIR_SRC_SAMPLES)/main_ps2.o $(DIR_SRC_SAMPLES)/demo5.o $(DIR_SRC_SAMPLES)/tunnel.o
-	@echo "-------------------------------------------------"
-	$(CC) $(CFLAGS) -T$(LINKFILE) -o $(DIR_BIN)/demo5.elf $(DIR_SRC_SAMPLES)/main_ps2.o $(DIR_SRC_SAMPLES)/demo5.o $(DIR_SRC_SAMPLES)/tunnel.o $(CRTFILE) $(DEMO_LIBS)
-
-
+demos:
+	$(MAKE) -C samples
 
 %.o: %.c
 	@echo "-------------------------------------------------"
